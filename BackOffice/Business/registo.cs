@@ -10,12 +10,12 @@ namespace BackOffice.Business
 {
     class registo
     {
-        private List<Bitmap> fotos { get; set; }
+        public List<Bitmap> fotos { get; set; }
         // voz
         // xml
 
-        private rocha rocha { get; set; }
-        private mineral mineral { get; set; }
+        public rocha rocha { get; set; }
+        public mineral mineral { get; set; }
 
 		public registo(){
 			this.fotos = new List<Bitmap>();

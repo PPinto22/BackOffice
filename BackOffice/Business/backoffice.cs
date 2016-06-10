@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GMap.NET;
 
 namespace BackOffice.Business
 {
     class backoffice
     {
-        private Dictionary<string, utilizador> utilizadores;
-        private Dictionary<int, percurso> percursos;
+        public Dictionary<string, utilizador> utilizadores;
+        public Dictionary<int, percurso> percursos;
 
         public backoffice()
         {
@@ -17,11 +18,11 @@ namespace BackOffice.Business
             this.percursos = new Dictionary<int, percurso>();
         }
 		
-		public HashSet<Location> getCoordenadas(){
-			HashSet<Location> ret = new HashSet<Location>();
-			foreach(percurso p in percursos) {
-			   HashSet<Location> coordPercurso = p.getCoordenadas();
-			   foreach(Location l in coordPercurso){
+		public HashSet<PointLatLng> getCoordenadas(){
+			HashSet<PointLatLng> ret = new HashSet<PointLatLng>();
+			foreach(percurso p in percursos.Values) {
+			   HashSet<PointLatLng> coordPercurso = p.getCoordenadas();
+			   foreach(PointLatLng l in coordPercurso){
 				   ret.Add(l);				   
 			   }
 			}

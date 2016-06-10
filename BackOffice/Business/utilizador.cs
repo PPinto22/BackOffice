@@ -8,9 +8,9 @@ namespace BackOffice.Business
 {
     class utilizador
     {
-        private string email { get; set; }
-        private string password { get; set; }
-        private string nome { get; set; }
+        public string email { get; set; }
+        public string password { get; set; }
+        public string nome { get; set; }
 
         public utilizador(string email, string password, string nome)
         {

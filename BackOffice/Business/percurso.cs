@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GMap.NET;
 
 namespace BackOffice.Business
 {
     class percurso
     {
-        private DateTime data { get; set; }
-        private List<atividade> atividades { get; set; }
-        private string utilizador;
+        public DateTime data { get; set; }
+        public List<atividade> atividades { get; set; }
+        public string utilizador;
 
         public percurso(DateTime data, List<atividade> atividades, string utilizador)
         {
@@ -19,10 +20,10 @@ namespace BackOffice.Business
             this.utilizador = utilizador;
         }
 
-		public HashSet<Location> getCoordenadas(){
-			HashSet<Location> ret = new HashSet<Location>();
+		public HashSet<PointLatLng> getCoordenadas(){
+			HashSet<PointLatLng> ret = new HashSet<PointLatLng>();
 			foreach(atividade a in atividades) {
-			   Location l = a.getCoordenadas();
+                PointLatLng l = a.coordenadas;
 			   ret.Add(l);
 			}
 			

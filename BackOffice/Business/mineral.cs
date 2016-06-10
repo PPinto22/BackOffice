@@ -8,10 +8,10 @@ namespace BackOffice.Business
 {
     class mineral
     {
-        private string designacao { get; set; }
-        private float peso { get; set; }
-        private string risca { get; set; }
-        private string cor { get; set; }
+        public string designacao { get; set; }
+        public float peso { get; set; }
+        public string risca { get; set; }
+        public string cor { get; set; }
 
         public mineral() { }
         public mineral(string designacao, float peso, string risca, string cor)

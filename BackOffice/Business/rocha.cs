@@ -8,11 +8,11 @@ namespace BackOffice.Business
 {
     public class rocha
     {
-        private string designacao { get; set; }
-        private string tipo { get; set; }
-        private float peso { get; set; }
-        private string textura { get; set; }
-        private string cor { get; set; }
+        public string designacao { get; set; }
+        public string tipo { get; set; }
+        public float peso { get; set; }
+        public string textura { get; set; }
+        public string cor { get; set; }
 
         public rocha() { }
         public rocha(string designacao, string tipo, float peso, string textura, string cor)
