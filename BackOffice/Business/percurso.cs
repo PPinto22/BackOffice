@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GMap.NET;
+using System.Xml;
+using System.IO;
 
 namespace BackOffice.Business
 {
@@ -11,7 +13,7 @@ namespace BackOffice.Business
     {
         public DateTime data { get; set; }
         public List<atividade> atividades { get; set; }
-        public string utilizador;
+        public string utilizador { get; set; }
 
         public percurso(DateTime data, List<atividade> atividades, string utilizador)
         {
@@ -29,6 +31,25 @@ namespace BackOffice.Business
 			
 			return ret;
 		}
+
+        public static percurso readXML(XmlNode sessao)
+        {
+            XmlNode data = sessao.SelectSingleNode("/data");
+           
+            // TODO
+
+            return null;
+        }
+
+        public string writeXML()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            // TODO ...
+
+            return sb.ToString();
+
+        }
 		
         public void addAtividade(atividade atv)
         {
