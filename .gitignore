@@ -2,10 +2,7 @@
 *.suo
 *.user
 *.sdf
-bin/
 obj/
-Debug/
-Release/
 *.opensdf
 *.tlog
 *.log
