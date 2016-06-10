@@ -17,6 +17,16 @@ namespace BackOffice.Business
         private rocha rocha { get; set; }
         private mineral mineral { get; set; }
 
-        // construtor...
+		public registo(){
+			this.fotos = new List<Bitmap>();
+		}
+		
+		public registo(List<Bitmap> fotos){
+			this.fotos = fotos;
+		}
+		
+		public void addFoto(Bitmap foto){
+			this.fotos.Add(foto);
+		}
     }
 }

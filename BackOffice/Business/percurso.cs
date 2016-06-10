@@ -19,9 +19,19 @@ namespace BackOffice.Business
             this.utilizador = utilizador;
         }
 
+		public HashSet<Location> getCoordenadas(){
+			HashSet<Location> ret = new HashSet<Location>();
+			foreach(atividade a in atividades) {
+			   Location l = a.getCoordenadas();
+			   ret.Add(l);
+			}
+			
+			return ret;
+		}
+		
         public void addAtividade(atividade atv)
         {
-            // TODO
+            this.atividades.Add(atv);
         }
     }
 }

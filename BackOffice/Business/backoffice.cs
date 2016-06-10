@@ -16,5 +16,17 @@ namespace BackOffice.Business
             this.utilizadores = new Dictionary<string, utilizador>();
             this.percursos = new Dictionary<int, percurso>();
         }
+		
+		public HashSet<Location> getCoordenadas(){
+			HashSet<Location> ret = new HashSet<Location>();
+			foreach(percurso p in percursos) {
+			   HashSet<Location> coordPercurso = p.getCoordenadas();
+			   foreach(Location l in coordPercurso){
+				   ret.Add(l);				   
+			   }
+			}
+			
+			return ret;
+		}
     }
 }
