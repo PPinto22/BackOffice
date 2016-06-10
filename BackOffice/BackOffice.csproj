@@ -52,8 +52,29 @@
     <Compile Include="Interface\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interface\signUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\signUp.Designer.cs">
+      <DependentUpon>signUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\login.Designer.cs">
+      <DependentUpon>login.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interface\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Interface\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\signUp.resx">
+      <DependentUpon>signUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\login.resx">
+      <DependentUpon>login.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -78,6 +99,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Business\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
