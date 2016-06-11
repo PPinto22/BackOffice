@@ -13,7 +13,12 @@ namespace BackOffice.Business
         public string risca { get; set; }
         public string cor { get; set; }
 
-        public mineral() { }
+        public mineral() {
+            this.designacao = string.Empty;
+            this.peso = 0;
+            this.risca = string.Empty;
+            this.cor = string.Empty;
+        }
         public mineral(string designacao, float peso, string risca, string cor)
         {
             this.designacao = designacao;

@@ -14,7 +14,13 @@ namespace BackOffice.Business
         public string textura { get; set; }
         public string cor { get; set; }
 
-        public rocha() { }
+        public rocha() {
+            this.designacao = string.Empty;
+            this.tipo = string.Empty;
+            this.peso = 0;
+            this.textura = string.Empty;
+            this.cor = string.Empty;
+        }
         public rocha(string designacao, string tipo, float peso, string textura, string cor)
         {
             this.designacao = designacao;

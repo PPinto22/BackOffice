@@ -4,17 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GMap.NET;
+using BackOffice.DAO;
 
 namespace BackOffice.Business
 {
     class backoffice
     {
-        public Dictionary<string, utilizador> utilizadores;
+        public utilizadoresDAO utilizadores;
         public Dictionary<int, percurso> percursos;
 
         public backoffice()
         {
-            this.utilizadores = new Dictionary<string, utilizador>();
+            this.utilizadores = new utilizadoresDAO();
             this.percursos = new Dictionary<int, percurso>();
         }
 		
