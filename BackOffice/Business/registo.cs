@@ -10,7 +10,7 @@ using System.Xml;
 
 namespace BackOffice.Business
 {
-    class registo
+    public class registo
     {
         public const int ROCHA = 0;
         public const int MINERAL = 1;

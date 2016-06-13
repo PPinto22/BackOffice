@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BackOffice.Business
 {
-    class mineral
+    public class mineral
     {
         public string designacao { get; set; }
         public float peso { get; set; }

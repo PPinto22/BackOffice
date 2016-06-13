@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BackOffice.Business
 {
-    class utilizador
+    public class utilizador
     {
         public string email { get; set; }
         public string password { get; set; }

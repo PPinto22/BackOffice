@@ -9,7 +9,7 @@ using System.IO;
 
 namespace BackOffice.Business
 {
-    class percurso
+    public class percurso
     {
         public DateTime data { get; set; }
         public List<atividade> atividades { get; set; }

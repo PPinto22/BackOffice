@@ -9,7 +9,7 @@ using System.IO;
 
 namespace BackOffice.Business
 {
-    class atividade
+    public class atividade
     {
         public PointLatLng coordenadas { get; set; }
         public string objetivos { get; set; }

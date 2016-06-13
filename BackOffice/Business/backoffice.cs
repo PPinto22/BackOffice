@@ -8,7 +8,7 @@ using BackOffice.DAO;
 
 namespace BackOffice.Business
 {
-    class backoffice
+    public class backoffice
     {
         public utilizadoresDAO utilizadores;
         public Dictionary<int, percurso> percursos;
