@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BackOffice.DAO
 {
-    class utilizadoresDAO
+    public class utilizadoresDAO
     {
         public utilizadoresDAO() { }
 

@@ -3,6 +3,7 @@
 *.user
 *.sdf
 obj/
+bin/
 *.opensdf
 *.tlog
 *.log
