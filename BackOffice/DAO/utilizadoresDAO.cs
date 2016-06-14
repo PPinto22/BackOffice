@@ -52,7 +52,7 @@ namespace BackOffice.DAO
             if (reader.HasRows)
             {
                 reader.Read();
-                utl = new utilizador(reader.GetString(0), reader.GetString(1), reader.GetString(2));
+                utl = new utilizador(reader.GetString(0).Trim(), reader.GetString(1).Trim(), reader.GetString(2).Trim());
             }
 
             myConnection.Close();
@@ -74,7 +74,7 @@ namespace BackOffice.DAO
             List<utilizador> utilizadores = new List<utilizador>();
 
             while (reader.Read()) {
-                utilizador utl = new utilizador(reader.GetString(0), reader.GetString(1), reader.GetString(2));
+                utilizador utl = new utilizador(reader.GetString(0).Trim(), reader.GetString(1).Trim(), reader.GetString(2).Trim());
                 utilizadores.Add(utl);
             }
 
