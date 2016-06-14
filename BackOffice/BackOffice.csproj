@@ -52,6 +52,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\atividade.cs" />
+    <Compile Include="Business\backoffice.cs" />
+    <Compile Include="Business\mineral.cs" />
+    <Compile Include="Business\percurso.cs" />
+    <Compile Include="Business\registo.cs" />
+    <Compile Include="Business\rocha.cs" />
+    <Compile Include="Business\utilizador.cs" />
+    <Compile Include="DAO\utilizadoresDAO.cs" />
     <Compile Include="Interface\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,9 +120,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Business\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>

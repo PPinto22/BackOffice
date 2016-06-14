@@ -67,5 +67,7 @@ namespace BackOffice.Properties
                 resourceCulture = value;
             }
         }
+
+        public static string DB_CONNECTION_STRING { get; internal set; }
     }
 }

@@ -76,8 +76,10 @@
             // 
             // gMapControl1
             // 
+            this.gMapControl1.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.gMapControl1.Bearing = 0F;
             this.gMapControl1.CanDragMap = true;
+            this.gMapControl1.CausesValidation = false;
             this.gMapControl1.EmptyTileColor = System.Drawing.Color.Navy;
             this.gMapControl1.GrayScaleMode = false;
             this.gMapControl1.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
@@ -113,6 +115,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
             this.Text = "-";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

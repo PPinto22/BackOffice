@@ -121,6 +121,7 @@
             this.Controls.Add(this.textBox1);
             this.Name = "signUp";
             this.Text = "Sign Up";
+            this.Load += new System.EventHandler(this.signUp_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

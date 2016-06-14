@@ -26,5 +26,10 @@ namespace BackOffice.Interface
         {
 
         }
+
+        private void signUp_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

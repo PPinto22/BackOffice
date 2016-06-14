@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BackOffice.DAO;
+using BackOffice.Business;
 
 namespace BackOffice
 {
@@ -15,6 +17,7 @@ namespace BackOffice
         public login()
         {
             InitializeComponent();
+            this.textBox2.PasswordChar = '*';
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -29,6 +32,35 @@ namespace BackOffice
 
         private void label3_Click(object sender, EventArgs e)
         {   
+
+        }
+
+        private void login_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string eMail = textBox1.Text;
+            string password = textBox2.Text;
+
+            utilizadoresDAO connection = new utilizadoresDAO();
+            if (connection.contains(eMail))
+            {
+                utilizador user = connection.get(eMail);
+                if (user.password.Equals(password))
+                {
+                    Interface.Form1 menu_inicial = (new BackOffice.Interface.Form1(user));
+                    menu_inicial.ShowDialog();
+                }
+                MessageBox.Show("Password incorreta!");
+                textBox2.Clear();
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

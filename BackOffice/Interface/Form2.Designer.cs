@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.gMapControl2 = new GMap.NET.WindowsForms.GMapControl();
-            this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
@@ -41,6 +40,9 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // gMapControl2
@@ -68,16 +70,6 @@
             this.gMapControl2.TabIndex = 5;
             this.gMapControl2.Zoom = 0D;
             this.gMapControl2.Load += new System.EventHandler(this.gMapControl1_Load);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(453, 522);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(140, 23);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Adicionar atividade";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
@@ -175,19 +167,45 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(453, 607);
+            this.button5.Location = new System.Drawing.Point(453, 522);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(140, 23);
             this.button5.TabIndex = 19;
-            this.button5.Text = "Nova atividade";
+            this.button5.Text = "Adicionar atividade";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(453, 551);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(140, 23);
+            this.button6.TabIndex = 20;
+            this.button6.Text = "Criar percurso";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(517, 607);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(76, 23);
+            this.button1.TabIndex = 21;
+            this.button1.Text = "Cancelar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // add_percurso
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(621, 651);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -199,7 +217,6 @@
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.gMapControl2);
             this.Name = "add_percurso";
             this.Text = "Adicionar percurso";
@@ -212,7 +229,6 @@
         #endregion
 
         private GMap.NET.WindowsForms.GMapControl gMapControl2;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RichTextBox richTextBox1;
@@ -224,5 +240,8 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Button button1;
     }
 }
