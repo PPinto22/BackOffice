@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GMap.NET;
 
 namespace BackOffice
 {
@@ -21,18 +22,16 @@ namespace BackOffice
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            utilizadoresDAO dao = new utilizadoresDAO();
+            percursosDAO dao = new percursosDAO();
+            utilizadoresDAO uDAO = new utilizadoresDAO();
 
             try
             {
-                utilizador u = new utilizador("teste2", "pass2", "alberto teste 2");
-                if (dao.add(u))
+                List<percurso> percursos = dao.getAll();
+                foreach(percurso p in percursos)
                 {
-                    MessageBox.Show("Sucesso");
-                }
-                else
-                {
-                    MessageBox.Show("Fail");
+                    dao.remove(p);
+                    MessageBox.Show("remove: " + p.data.ToString());
                 }
             }
             catch(Exception ex)

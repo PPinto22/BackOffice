@@ -75,7 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\atividade.cs" />
-    <Compile Include="Business\atividadesDAO.cs" />
+    <Compile Include="DAO\atividadesDAO.cs" />
     <Compile Include="Business\backoffice.cs" />
     <Compile Include="Business\mineral.cs" />
     <Compile Include="Business\percurso.cs" />

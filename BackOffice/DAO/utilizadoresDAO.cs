@@ -103,5 +103,23 @@ namespace BackOffice.DAO
 
             return true;
         }
+
+        public bool remove(string email)
+        {
+            if (!this.contains(email)) return false;
+
+            SqlConnection myConnection = new SqlConnection(Properties.Resources.DB_CONNECTION_STRING);
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "delete from Utilizadores where email = @p0";
+            cmd.Parameters.AddWithValue("@p0", email);
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = myConnection;
+
+            myConnection.Open();
+            cmd.ExecuteNonQuery();
+
+            return true;
+        }
     }
 }
