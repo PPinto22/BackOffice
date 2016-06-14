@@ -130,19 +130,25 @@ namespace BackOffice.Interface
         {
             string website = textBox1.Text;
             if (website != "")  {
-                
-                using (WebClient client = new WebClient()) 
+                if (listBox1.Items.Contains("http://"+website) || listBox1.Items.Contains(website))
                 {
-                    
-                    try
+                    MessageBox.Show("Website já foi inserido.");
+                }
+                else {
+                    using (WebClient client = new WebClient())
                     {
-                        if (!website.StartsWith("http://")) website = "http://"+website;
-                        string htmlCode = client.DownloadString(website);
-                        listBox1.Items.Add(website);
-                        this.websites.Add(website);
-                    }
-                    catch {
+
+                        try
+                        {
+                            if (!website.StartsWith("http://")) website = "http://" + website;
+                            string htmlCode = client.DownloadString(website);
+                            listBox1.Items.Add(website);
+                            this.websites.Add(website);
+                        }
+                        catch
+                        {
                             MessageBox.Show("Website inválido.");
+                        }
                     }
                 }
             }

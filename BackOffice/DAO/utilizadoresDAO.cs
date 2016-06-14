@@ -60,6 +60,29 @@ namespace BackOffice.DAO
             return utl;
         }
 
+        public List<utilizador> getUsers()
+        {
+            SqlConnection myConnection = new SqlConnection(Properties.Resources.DB_CONNECTION_STRING);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "select * from Utilizadores";
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = myConnection;
+
+            myConnection.Open();
+
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<utilizador> utilizadores = new List<utilizador>();
+
+            while (reader.Read()) {
+                utilizador utl = new utilizador(reader.GetString(0), reader.GetString(1), reader.GetString(2));
+                utilizadores.Add(utl);
+            }
+
+            myConnection.Close();
+
+            return utilizadores;
+        }
+
         public bool add(utilizador u)
         {
             if (this.contains(u.email)) return false;
