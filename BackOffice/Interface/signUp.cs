@@ -37,8 +37,8 @@ namespace BackOffice.Interface
         {
             
             string eMail = textBox1.Text;
-            string nome = textBox3.Text;
-            string password = textBox2.Text;
+            string nome = textBox2.Text;
+            string password = textBox3.Text;
 
             utilizadoresDAO connection = new utilizadoresDAO();
             if (eMail.Equals("") || nome.Equals("") || password.Equals("")) MessageBox.Show("Existem campos por preencher.");
@@ -87,6 +87,11 @@ namespace BackOffice.Interface
             {
                 return false;
             }
+        }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

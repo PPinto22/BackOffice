@@ -11,6 +11,8 @@ using GMap.NET.MapProviders;
 using GMap.NET;
 using GMap.NET.WindowsForms;
 using BackOffice.Business;
+using System.IO;
+using System.Xml;
 
 namespace BackOffice.Interface
 {
@@ -40,7 +42,7 @@ namespace BackOffice.Interface
             this.percursos = new List<percurso>();
         }
 
-        /*public Form1()
+        public Form1()
         {
             InitializeComponent();
             gMapControl1.DragButton = MouseButtons.Left;
@@ -55,7 +57,7 @@ namespace BackOffice.Interface
 
 
             markersOverlay = new GMapOverlay("markers");
-        }*/
+        }
         
         private void mouse_click(object sender,System.Windows.Forms.MouseEventArgs e)
         {
@@ -83,6 +85,23 @@ namespace BackOffice.Interface
 
         private void button3_Click(object sender, EventArgs e)
         {
+            DialogResult result = openFileDialog1.ShowDialog(); // Show the dialog.
+            if (result == DialogResult.OK) // Test result.
+            {
+                string file = openFileDialog1.FileName;
+                try
+                {
+                    string text = File.ReadAllText(file);
+                    XmlDocument xml_lido = new XmlDocument();
+                    xml_lido.Load(text);
+                    percurso p = percurso.readXML(xml_lido,this.user.email);
+                    Console.WriteLine(p.utilizador.ToString());
+                    MessageBox.Show("Sessão carregada com sucesso!");
+                }
+                catch (IOException)
+                {
+                }
+            }
         }
         private void gMapControl1_Load(object sender, EventArgs e)
         {
