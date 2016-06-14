@@ -52,12 +52,36 @@ namespace BackOffice.DAO
             if (reader.HasRows)
             {
                 reader.Read();
-                utl = new utilizador(reader.GetString(0), reader.GetString(1), reader.GetString(2));
+                utl = new utilizador(reader.GetString(0).Trim(), reader.GetString(1).Trim(), reader.GetString(2).Trim());
             }
 
             myConnection.Close();
 
             return utl;
+        }
+
+        public List<utilizador> getUsers()
+        {
+            SqlConnection myConnection = new SqlConnection(Properties.Resources.DB_CONNECTION_STRING);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "select * from Utilizadores";
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = myConnection;
+
+            myConnection.Open();
+
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<utilizador> utilizadores = new List<utilizador>();
+
+            while (reader.Read())
+            {
+                utilizador utl = new utilizador(reader.GetString(0).Trim(), reader.GetString(1).Trim(), reader.GetString(2).Trim());
+                utilizadores.Add(utl);
+            }
+
+            myConnection.Close();
+
+            return utilizadores;
         }
 
         public bool add(utilizador u)

@@ -15,11 +15,32 @@ namespace BackOffice.Business
         public List<atividade> atividades { get; set; }
         public string utilizador { get; set; }
 
+        public atividadesDAO atividadesDAO { get; set; }
+
+        public percurso()
+        {
+            this.data = new DateTime();
+            this.atividades = new List<atividade>();
+            this.utilizador = string.Empty;
+
+            this.atividadesDAO = null;
+        }
+
+        public percurso(DateTime data, string utilizador, int idPercursoBD)
+        {
+            this.data = data;
+            this.atividades = new List<atividade>();
+            this.utilizador = utilizador;
+            this.atividadesDAO = new atividadesDAO(idPercursoBD);
+        }
+
         public percurso(DateTime data, string utilizador)
         {
             this.data = data;
             this.atividades = new List<atividade>();
             this.utilizador = utilizador;
+
+            this.atividadesDAO = null;
         }
 
         public percurso(DateTime data, List<atividade> atividades, string utilizador)
@@ -27,6 +48,15 @@ namespace BackOffice.Business
             this.data = data;
             this.atividades = atividades;
             this.utilizador = utilizador;
+
+            this.atividadesDAO = null;
+        }
+
+        public void loadAtividades()
+        {
+            if (this.atividadesDAO == null) return;
+
+            // TODO - Carregar atividades da BD para memoria
         }
 
 		public HashSet<PointLatLng> getCoordenadas(){
