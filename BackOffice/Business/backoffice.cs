@@ -11,24 +11,18 @@ namespace BackOffice.Business
     public class backoffice
     {
         public utilizadoresDAO utilizadores;
-        public Dictionary<int, percurso> percursos;
+        public percursosDAO percursos;
 
         public backoffice()
         {
             this.utilizadores = new utilizadoresDAO();
-            this.percursos = new Dictionary<int, percurso>();
+            this.percursos = new percursosDAO();
         }
 		
-		public HashSet<PointLatLng> getCoordenadas(){
-			HashSet<PointLatLng> ret = new HashSet<PointLatLng>();
-			foreach(percurso p in percursos.Values) {
-			   HashSet<PointLatLng> coordPercurso = p.getCoordenadas();
-			   foreach(PointLatLng l in coordPercurso){
-				   ret.Add(l);				   
-			   }
-			}
-			
-			return ret;
-		}
+        public HashSet<PointLatLng> getCoodenadas()
+        {
+            return this.percursos.getCoordenadas();
+        }
+
     }
 }

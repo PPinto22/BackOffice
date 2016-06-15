@@ -16,7 +16,7 @@ namespace BackOffice
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new BackOffice.Interface.Form1());
+            Application.Run(new BackOffice.Interface.Form3());
         }
     }
 }

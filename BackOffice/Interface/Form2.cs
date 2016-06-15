@@ -224,7 +224,10 @@ namespace BackOffice.Interface
                 {
                     string xml_gerado = this.percurso.writeXML();
                     using (System.IO.StreamWriter sw = new System.IO.StreamWriter(saveFileDialog1.FileName))
-                    sw.WriteLine(xml_gerado);
+                    {
+                        sw.WriteLine(xml_gerado);
+                    }
+                    
                 }
             }
         }

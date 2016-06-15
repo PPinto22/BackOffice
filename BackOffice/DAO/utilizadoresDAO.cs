@@ -73,7 +73,8 @@ namespace BackOffice.DAO
             SqlDataReader reader = cmd.ExecuteReader();
             List<utilizador> utilizadores = new List<utilizador>();
 
-            while (reader.Read()) {
+            while (reader.Read())
+            {
                 utilizador utl = new utilizador(reader.GetString(0).Trim(), reader.GetString(1).Trim(), reader.GetString(2).Trim());
                 utilizadores.Add(utl);
             }
@@ -94,6 +95,24 @@ namespace BackOffice.DAO
             cmd.Parameters.AddWithValue("@p1", u.email);
             cmd.Parameters.AddWithValue("@p2", u.password);
             cmd.Parameters.AddWithValue("@p3", u.nome);
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = myConnection;
+
+            myConnection.Open();
+            cmd.ExecuteNonQuery();
+
+            return true;
+        }
+
+        public bool remove(string email)
+        {
+            if (!this.contains(email)) return false;
+
+            SqlConnection myConnection = new SqlConnection(Properties.Resources.DB_CONNECTION_STRING);
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "delete from Utilizadores where email = @p0";
+            cmd.Parameters.AddWithValue("@p0", email);
             cmd.CommandType = CommandType.Text;
             cmd.Connection = myConnection;
 

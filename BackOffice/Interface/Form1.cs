@@ -95,11 +95,13 @@ namespace BackOffice.Interface
                     XmlDocument xml_lido = new XmlDocument();
                     xml_lido.Load(text);
                     percurso p = percurso.readXML(xml_lido,this.user.email);
-                    Console.WriteLine(p.utilizador.ToString());
+                    BackOffice.DAO.percursosDAO conn = new BackOffice.DAO.percursosDAO();
+                    conn.add(p);
                     MessageBox.Show("Sessão carregada com sucesso!");
                 }
-                catch (IOException)
+                catch (Exception ex)
                 {
+                    MessageBox.Show(ex.StackTrace);
                 }
             }
         }
