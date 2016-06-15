@@ -27,11 +27,12 @@ namespace BackOffice
 
             try
             {
-                List<percurso> percursos = dao.getAll();
-                foreach(percurso p in percursos)
+                Bitmap foto = new Bitmap(300, 200);
+                byte[] foto_bytes = registo.imageToByteArray(foto);
+                string foto_string = Convert.ToBase64String(foto_bytes);
+                using (System.IO.StreamWriter sw = new System.IO.StreamWriter("sessao.gp"))
                 {
-                    dao.remove(p);
-                    MessageBox.Show("remove: " + p.data.ToString());
+                    sw.Write(foto_string);
                 }
             }
             catch(Exception ex)

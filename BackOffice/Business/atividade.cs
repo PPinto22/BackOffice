@@ -45,6 +45,15 @@ namespace BackOffice.Business
             this.registo = registo;
         }
 
+        public atividade(PointLatLng coordenadas, string objetivos, string notas, registo registo)
+        {
+            this.coordenadas = coordenadas;
+            this.objetivos = objetivos;
+            this.notas = notas;
+            this.websites = new List<string>();
+            this.registo = registo;
+        }
+
         public static atividade readXML(XmlNode nodo_atividade)
         {
             XmlNode localizacao = nodo_atividade.SelectSingleNode("localizacao");
