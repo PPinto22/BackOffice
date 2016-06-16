@@ -20,10 +20,13 @@ namespace BackOffice.Interface
     {
         public GMapOverlay markersOverlay;
         public utilizador user;
-        public List<percurso> percursos;
+        public HashSet<PointLatLng> coordenadas;
+        public BackOffice.DAO.percursosDAO conn;
 
         public Form1(utilizador u)
         {
+            conn = new BackOffice.DAO.percursosDAO();
+            this.coordenadas = conn.getCoordenadas();
             InitializeComponent();
             this.Text = "Utilizador: " + u.nome;
             gMapControl1.DragButton = MouseButtons.Left;
@@ -34,12 +37,17 @@ namespace BackOffice.Interface
             gMapControl1.MaxZoom = 24;
             gMapControl1.Zoom = 9;
             gMapControl1.AutoScroll = true;
-            gMapControl1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.mouse_click);
+            //gMapControl1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.mouse_click);
 
 
             this.markersOverlay = new GMapOverlay("markers");
+            foreach(PointLatLng p in coordenadas) {  
+                GMap.NET.WindowsForms.Markers.GMarkerGoogle penis = new GMap.NET.WindowsForms.Markers.GMarkerGoogle(p, GMap.NET.WindowsForms.Markers.GMarkerGoogleType.red);
+                markersOverlay.Markers.Add(penis);
+            }
+            gMapControl1.Overlays.Add(markersOverlay);
+
             this.user = u;
-            this.percursos = new List<percurso>();
         }
 
         public Form1()
@@ -53,13 +61,13 @@ namespace BackOffice.Interface
             gMapControl1.MaxZoom = 24;
             gMapControl1.Zoom = 9;
             gMapControl1.AutoScroll = true;
-            gMapControl1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.mouse_click);
+            //gMapControl1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.mouse_click);
 
 
             markersOverlay = new GMapOverlay("markers");
         }
         
-        private void mouse_click(object sender,System.Windows.Forms.MouseEventArgs e)
+        /*private void mouse_click(object sender,System.Windows.Forms.MouseEventArgs e)
         {
             int x = e.Location.X;
             int y = e.Location.Y;
@@ -69,7 +77,7 @@ namespace BackOffice.Interface
             GMap.NET.WindowsForms.Markers.GMarkerGoogle penis = new GMap.NET.WindowsForms.Markers.GMarkerGoogle(p, GMap.NET.WindowsForms.Markers.GMarkerGoogleType.red);
             markersOverlay.Markers.Add(penis);
             gMapControl1.Overlays.Add(markersOverlay);
-        }
+        }*/
         
 
         private void button1_Click(object sender, EventArgs e)
@@ -81,6 +89,9 @@ namespace BackOffice.Interface
         }
         private void button2_Click(object sender, EventArgs e)
         {
+            Form3 f = new Form3();
+            f.ShowDialog();
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -112,6 +123,19 @@ namespace BackOffice.Interface
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+        private void refresh()
+        {
+            conn = new BackOffice.DAO.percursosDAO();
+            this.coordenadas = conn.getCoordenadas();
+
+            this.markersOverlay = new GMapOverlay("markers");
+            foreach (PointLatLng p in coordenadas)
+            {
+                GMap.NET.WindowsForms.Markers.GMarkerGoogle penis = new GMap.NET.WindowsForms.Markers.GMarkerGoogle(p, GMap.NET.WindowsForms.Markers.GMarkerGoogleType.red);
+                markersOverlay.Markers.Add(penis);
+            }
+            gMapControl1.Overlays.Add(markersOverlay);
         }
     }
 }

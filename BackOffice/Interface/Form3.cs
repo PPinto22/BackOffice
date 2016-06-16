@@ -24,8 +24,9 @@ namespace BackOffice.Interface
         {
             this.dataInicio = new DateTime();
             this.dataFim = new DateTime();
+            
             InitializeComponent();
-
+            MessageBox.Show("asd");
             conn1 = new percursosDAO();
             this.percursos = conn1.getAll();
             this.refresh();

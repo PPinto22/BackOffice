@@ -44,24 +44,27 @@ namespace BackOffice
         {
             string eMail = textBox1.Text;
             string pass = textBox2.Text;
-            
-            utilizadoresDAO connection = new utilizadoresDAO();
 
-            if (connection.contains(eMail))
-            {
-                utilizador user = connection.get(eMail);
-                if (user.password.Equals(pass))
+            try {
+                utilizadoresDAO connection = new utilizadoresDAO();
+
+                if (connection.contains(eMail))
                 {
-                    Interface.Form1 menu_inicial = (new BackOffice.Interface.Form1(user));
-                    menu_inicial.ShowDialog();
+                    utilizador user = connection.get(eMail);
+                    if (user.password.Equals(pass))
+                    {
+                        Interface.Form1 menu_inicial = (new BackOffice.Interface.Form1(user));
+                        menu_inicial.ShowDialog();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Password incorreta!");
+                        textBox2.Clear();
+                    }
+
                 }
-                else
-                {
-                    MessageBox.Show("Password incorreta!");
-                    textBox2.Clear();
-                }
-                
             }
+            catch(Exception ex) { MessageBox.Show("Erro de conexão."); }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
