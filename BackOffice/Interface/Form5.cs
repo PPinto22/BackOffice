@@ -16,5 +16,11 @@ namespace BackOffice.Interface
         {
             InitializeComponent();
         }
+
+        private void Form5_Load(object sender, EventArgs e)
+        {
+            Bitmap image1 = (Bitmap)Image.FromFile(@"C:\teste.jpg", true);
+            this.pictureBox1.Image = image1;
+        }
     }
 }

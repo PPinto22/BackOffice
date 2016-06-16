@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BackOffice.Interface;
+using System.Windows;
 
 namespace BackOffice
 {
@@ -17,8 +18,7 @@ namespace BackOffice
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Form3 f = new Form3();
-            Application.Run(new login());
+            Application.Run(new Form5());
         }
     }
 }

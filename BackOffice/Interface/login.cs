@@ -54,7 +54,10 @@ namespace BackOffice
                     if (user.password.Equals(pass))
                     {
                         Interface.Form1 menu_inicial = (new BackOffice.Interface.Form1(user));
+                        this.Hide();
                         menu_inicial.ShowDialog();
+                        
+                        
                     }
                     else
                     {
@@ -63,6 +66,7 @@ namespace BackOffice
                     }
 
                 }
+                else { MessageBox.Show("E-mail não reconhecido."); }
             }
             catch(Exception ex) { MessageBox.Show("Erro de conexão."); }
         }
