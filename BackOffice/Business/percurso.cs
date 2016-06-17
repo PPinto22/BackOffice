@@ -55,8 +55,7 @@ namespace BackOffice.Business
         public void loadAtividades()
         {
             if (this.atividadesDAO == null) return;
-
-            // TODO - Carregar atividades da BD para memoria
+            this.atividades = this.atividadesDAO.getAtividades();
         }
 
 		public HashSet<PointLatLng> getCoordenadas(){

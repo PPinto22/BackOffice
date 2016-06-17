@@ -39,8 +39,9 @@ namespace BackOffice.Interface
             button1.Enabled = false;
             button2.Enabled = false;
             checkedListBox1.Enabled = false;
-           
-        }
+            this.listView1.FullRowSelect = true;
+            this.listView1.MultiSelect = false;
+         }
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -190,7 +191,9 @@ namespace BackOffice.Interface
         private void button4_Click(object sender, EventArgs e)
         {
             percurso p = (percurso)this.listView1.SelectedItems[0].Tag;
+            p.loadAtividades();
             Form5 f = new Form5(p);
+            f.ShowDialog();
         }
     }
 }

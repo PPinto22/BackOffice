@@ -36,6 +36,32 @@ namespace BackOffice.Business
             this.tipo = ND;
         }
 
+        public registo(rocha rocha, List<Bitmap> fotos)
+        {
+            this.tipo = ROCHA;
+            this.fotos = fotos;
+            this.rocha = rocha;
+        }
+
+        public registo(mineral mineral, List<Bitmap> fotos)
+        {
+            this.tipo = ROCHA;
+            this.fotos = fotos;
+            this.mineral = mineral;
+        }
+
+        public void setRocha(rocha rocha)
+        {
+            this.rocha = rocha;
+            this.tipo = ROCHA;
+        }
+
+        public void setMineral(mineral mineral)
+        {
+            this.mineral = mineral;
+            this.tipo = MINERAL;
+        }
+
         /*
          *  INCOMPLETO - Falta tratar da gravacao de voz,
          *  do tipo da descoberta, caracteristicas, ...

@@ -220,6 +220,7 @@ namespace BackOffice.Interface
             else
             {
                 saveFileDialog1.DefaultExt = ".gp";
+                saveFileDialog1.FileName = "percurso";
                 if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     string xml_gerado = this.percurso.writeXML();
