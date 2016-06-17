@@ -182,9 +182,15 @@ namespace BackOffice.Interface
             {
                 ListViewItem l = new ListViewItem(percursos[i].data.ToShortDateString());
                 l.SubItems.Add(percursos[i].utilizador);
-                
+                l.Tag = percursos[i];
                 this.listView1.Items.Add(l);
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            percurso p = (percurso)this.listView1.SelectedItems[0].Tag;
+            Form5 f = new Form5(p);
         }
     }
 }
