@@ -58,6 +58,7 @@
     <Compile Include="Business\percurso.cs" />
     <Compile Include="Business\registo.cs" />
     <Compile Include="Business\rocha.cs" />
+    <Compile Include="Business\StringWriterWithEncoding.cs" />
     <Compile Include="Business\utilizador.cs" />
     <Compile Include="DAO\atividadesDAO.cs" />
     <Compile Include="DAO\percursosDAO.cs" />

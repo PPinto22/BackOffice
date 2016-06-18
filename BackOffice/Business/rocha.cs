@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace BackOffice.Business
 {
@@ -28,6 +29,21 @@ namespace BackOffice.Business
             this.peso = peso;
             this.textura = textura;
             this.cor = cor;
+        }
+        public static rocha readXml (XmlNode x)
+        {
+            XmlNode designacao = x.SelectSingleNode("designacao");
+            string d = designacao.InnerText;
+            XmlNode tipo = x.SelectSingleNode("tipo");
+            string t = tipo.InnerText;
+            XmlNode peso = x.SelectSingleNode("peso");
+            float p = float.Parse(peso.InnerText);
+            XmlNode textura = x.SelectSingleNode("textura");
+            string tex = textura.InnerText;
+            XmlNode cor = x.SelectSingleNode("cor");
+            string c = cor.InnerText;
+            rocha rocha = new rocha(d,t,p,tex,c);
+            return rocha;
         }
     }
 }

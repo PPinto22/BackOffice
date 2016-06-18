@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GMap.NET;
 using System.Xml;
 using System.IO;
+using System.Globalization;
 
 namespace BackOffice.Business
 {
@@ -52,18 +53,18 @@ namespace BackOffice.Business
 
             double longitude, latitude;
             var attr = localizacao.Attributes["longitude"];
-            if (attr != null) longitude = double.Parse(attr.Value);
+            if (attr != null) longitude = double.Parse(attr.InnerText,CultureInfo.InvariantCulture);
             else throw new XmlException("Localizacao de atividade invalida");
 
             attr = localizacao.Attributes["latitude"];
-            if (attr != null) latitude = double.Parse(attr.Value);
+            if (attr != null) latitude = double.Parse(attr.InnerText, CultureInfo.InvariantCulture);
             else throw new XmlException("Localizacao de atividade invalida");
 
             string objetivos = string.Empty;
             XmlNode nodo_objetivos = nodo_atividade.SelectSingleNode("objetivos");
             if (nodo_objetivos != null)
             {
-                objetivos = nodo_objetivos.Value;
+                objetivos = nodo_objetivos.InnerText;
             }
 
             XmlNode nodo_registo = nodo_atividade.SelectSingleNode("registo");
@@ -81,10 +82,10 @@ namespace BackOffice.Business
             //localizacao
             writer.WriteStartElement("localizacao");
             writer.WriteStartAttribute("longitude");
-            writer.WriteString(coordenadas.Lng.ToString());
+            writer.WriteString(coordenadas.Lng.ToString(CultureInfo.InvariantCulture.NumberFormat));
             writer.WriteEndAttribute();
             writer.WriteStartAttribute("latitude");
-            writer.WriteString(coordenadas.Lat.ToString());
+            writer.WriteString(coordenadas.Lat.ToString(CultureInfo.InvariantCulture.NumberFormat));
             writer.WriteEndAttribute();
             writer.WriteEndElement();
 

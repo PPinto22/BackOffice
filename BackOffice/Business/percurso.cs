@@ -77,23 +77,23 @@ namespace BackOffice.Business
             int ano, mes, dia, hora, minuto;
             if (nodo_data == null || nodo_data.Attributes == null) throw new XmlException("Data invalida");
             var attr = nodo_data.Attributes["ano"];
-            if (attr != null) ano = int.Parse(attr.Value);
+            if (attr != null) ano = int.Parse(attr.InnerText);
             else throw new XmlException("Data invalida");
 
             attr = nodo_data.Attributes["mes"];
-            if (attr != null) mes = int.Parse(attr.Value);
+            if (attr != null) mes = int.Parse(attr.InnerText);
             else throw new XmlException("Data invalida");
 
             attr = nodo_data.Attributes["dia"];
-            if (attr != null) dia = int.Parse(attr.Value);
+            if (attr != null) dia = int.Parse(attr.InnerText);
             else throw new XmlException("Data invalida");
 
             attr = nodo_data.Attributes["hora"];
-            if (attr != null) hora = int.Parse(attr.Value);
+            if (attr != null) hora = int.Parse(attr.InnerText);
             else throw new XmlException("Data invalida");
 
             attr = nodo_data.Attributes["minuto"];
-            if (attr != null) minuto = int.Parse(attr.Value);
+            if (attr != null) minuto = int.Parse(attr.InnerText);
             else throw new XmlException("Data invalida");
 
             DateTime dt = new DateTime(ano, mes, dia, hora, minuto, 0);
@@ -116,11 +116,11 @@ namespace BackOffice.Business
 
         public string writeXML()
         {
-            StringBuilder sb = new StringBuilder();
+            StringWriterWithEncoding sw = new StringWriterWithEncoding(Encoding.UTF8);
 
             XmlWriterSettings ws = new XmlWriterSettings();
             ws.Indent = true;
-            using (XmlWriter writer = XmlWriter.Create(sb, ws))
+            using (XmlWriter writer = XmlWriter.Create(sw, ws))
             {
                 writer.WriteStartElement("sessao");
                 foreach(atividade a in this.atividades)
@@ -130,7 +130,7 @@ namespace BackOffice.Business
                 writer.WriteEndElement();
             }
 
-            return sb.ToString();
+            return sw.ToString();
 
         }
 		

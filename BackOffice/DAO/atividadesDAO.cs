@@ -150,7 +150,26 @@ namespace BackOffice.Business
                     fotos.Add(foto);
                 }
 
-                registo reg = new registo(fotos);
+                byte[] voz = null;
+                SqlConnection myConnection9 = new SqlConnection(Properties.Resources.DB_CONNECTION_STRING);
+                SqlCommand cmd9 = new SqlCommand();
+                cmd9.CommandText = "select * from Gravacoes where registo = @p1";
+                cmd9.Parameters.AddWithValue("@p1", registoid);
+                cmd9.CommandType = CommandType.Text;
+                cmd9.Connection = myConnection3;
+
+                myConnection3.Open();
+                SqlDataReader reader9 = cmd9.ExecuteReader();
+
+                string traducao = string.Empty;
+
+                if (reader9.Read())
+                {
+                    voz = (byte[])reader9[1];
+                    traducao = reader9.GetString(2).Trim();
+                    
+                }
+                registo reg = new registo(fotos, voz, traducao);
 
                 SqlConnection myConnection4 = new SqlConnection(Properties.Resources.DB_CONNECTION_STRING);
                 
