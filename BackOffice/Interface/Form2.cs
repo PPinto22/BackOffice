@@ -24,7 +24,7 @@ namespace BackOffice.Interface
         public string objetivos;
         public string notas;
         public List<string> websites;
-        GMap.NET.WindowsForms.Markers.GMarkerGoogle marker;
+        public GMap.NET.WindowsForms.Markers.GMarkerGoogle marker;
 
         public add_percurso()
         {
@@ -106,7 +106,7 @@ namespace BackOffice.Interface
                 markersOverlay.Markers.Add(marker);
                 gMapControl2.Overlays.Add(markersOverlay);
                 double currentZoom = gMapControl2.Zoom;
-                gMapControl2.Zoom = 9.1;
+                gMapControl2.Zoom = currentZoom+0.1;
                 gMapControl2.Zoom = currentZoom;
             }
             else
@@ -120,7 +120,7 @@ namespace BackOffice.Interface
                 markersOverlay.Markers.Add(marker);
                 gMapControl2.Overlays.Add(markersOverlay);
                 double currentZoom = gMapControl2.Zoom;
-                gMapControl2.Zoom = 9.1;
+                gMapControl2.Zoom = currentZoom+0.1;
                 gMapControl2.Zoom = currentZoom;
             }
         }
@@ -236,7 +236,6 @@ namespace BackOffice.Interface
             }
             this.point = new PointLatLng();
 
-            
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
@@ -260,9 +259,11 @@ namespace BackOffice.Interface
                     using (System.IO.StreamWriter sw = new System.IO.StreamWriter(saveFileDialog1.FileName))
                     {
                         sw.WriteLine(xml_gerado);
+                        MessageBox.Show("Percurso criado com sucesso!");
+                        this.Close();
                     }
-                    
                 }
+                
             }
         }
 

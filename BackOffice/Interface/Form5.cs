@@ -67,7 +67,7 @@ namespace BackOffice.Interface
         {
             this.label4.Text = "Designação";
             this.label5.Text = "Tipo";
-            this.label6.Text = "Peso";
+            this.label6.Text = "Peso (Kg)";
             this.label7.Text = "Textura";
             this.label8.Text = "Cor";
             this.label1.Text = "Atividade nº" + (this.currentActivity + 1).ToString();
@@ -95,20 +95,37 @@ namespace BackOffice.Interface
                 Bitmap resized = new Bitmap(imagem, new Size(this.pictureBox1.Width, this.pictureBox1.Height));
                 this.pictureBox1.Image = resized;
             }
+            else
+            {
+                Image image;
+                image = Image.FromFile("no-photo.png");
+                Image resized = (Image)(new Bitmap(image,this.pictureBox1.Width,this.pictureBox1.Height));
+                this.pictureBox1.Image = resized;
+            }
 
             byte[] bytes = this.percurso.atividades[currentActivity].registo.voz;
-            this.voz = bytes;
-            System.IO.File.WriteAllBytes("yourfilepath.wav", bytes);
-            simpleSound = new SoundPlayer("yourfilepath.wav");
-            /*//first option
+            if (bytes == null)
+            {
+                textBox1.Enabled = false;
+                button4.Enabled = false;
+                button5.Enabled = false;
+            }
+            else
+            {
+                this.voz = bytes;
+                System.IO.File.WriteAllBytes("yourfilepath.wav", bytes);
+                simpleSound = new SoundPlayer("qwerty.wav");
+            }
+            /*first option
             MemoryStream ms = new MemoryStream(bytes);
             SoundPlayer myPlayer = new SoundPlayer(ms);
             myPlayer.Play();*/
-            /*SpeechRecognitionEngine recognizer = new SpeechRecognitionEngine(new System.Globalization.CultureInfo("en-US"));
+            SpeechRecognitionEngine recognizer = new SpeechRecognitionEngine(new System.Globalization.CultureInfo("en-US"));
             Grammar dictationGrammar = new DictationGrammar();
             recognizer.LoadGrammar(dictationGrammar);
-            recognizer.SetInputToAudioStream(File.OpenRead("c:\\Utilizadores\\Pedro\\Documentos\\Visual Studio 2015\\Projects\\BackOffice\\BackOffice\\bin\\Debug\\asd.wav"),new System.Speech.AudioFormat.SpeechAudioFormatInfo(44100,AudioBitsPerSample.Sixteen,AudioChannel.Mono));
-            RecognitionResult result = recognizer.Recognize();*/
+            recognizer.SetInputToAudioStream(File.OpenRead("c:\\Utilizadores\\Pedro\\Documentos\\Visual Studio 2015\\Projects\\BackOffice\\BackOffice\\bin\\Release\\qwerty.wav"),new System.Speech.AudioFormat.SpeechAudioFormatInfo(44100,AudioBitsPerSample.Sixteen,AudioChannel.Mono));
+            RecognitionResult result = recognizer.Recognize();
+            this.textBox1.Text = result.ToString();
         }
 
             
@@ -125,7 +142,7 @@ namespace BackOffice.Interface
             this.label1.Text = "Atividade nº" + (this.currentActivity + 1).ToString();
             this.label4.Text = "Designação";
             this.label5.Text = "Risca";
-            this.label6.Text = "Peso";
+            this.label6.Text = "Peso (Kg)";
             this.label7.Text = "Cor";
             this.label8.Hide();
             this.label13.Hide();
@@ -141,6 +158,14 @@ namespace BackOffice.Interface
 
             Bitmap resized = new Bitmap(imagem, new Size(this.pictureBox1.Width, this.pictureBox1.Height));
             this.pictureBox1.Image = resized;
+
+            byte[] bytes = this.percurso.atividades[currentActivity].registo.voz;
+            if (bytes == null)
+            {
+                textBox1.Enabled = false;
+                button4.Enabled = false;
+                button5.Enabled = false;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -219,6 +244,21 @@ namespace BackOffice.Interface
         {
             Mapa mapa = new Mapa(this.percurso.atividades[currentActivity].coordenadas);
             mapa.ShowDialog();
+        }
+
+        private void label18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

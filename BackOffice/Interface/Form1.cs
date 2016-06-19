@@ -103,6 +103,7 @@ namespace BackOffice.Interface
 
         private void button3_Click(object sender, EventArgs e)
         {
+            this.openFileDialog1.FileName = "";
             DialogResult result = openFileDialog1.ShowDialog(); // Show the dialog.
             if (result == DialogResult.OK) // Test result.
             {
@@ -125,7 +126,7 @@ namespace BackOffice.Interface
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.StackTrace);
+                    MessageBox.Show("Erro ao carregar ficheiro.");
                 }
             }
             /*

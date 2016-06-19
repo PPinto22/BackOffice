@@ -139,7 +139,7 @@ namespace BackOffice.Business
             using (MemoryStream stream = new MemoryStream())
             {
                 
-                imageIn.Save(stream, System.Drawing.Imaging.ImageFormat.Jpeg);
+                imageIn.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
                 stream.Close();
 
                 byteArray = stream.ToArray();

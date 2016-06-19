@@ -68,7 +68,7 @@
             this.ClientSize = new System.Drawing.Size(651, 379);
             this.Controls.Add(this.gMapControl3);
             this.Name = "Mapa";
-            this.Text = "Form6";
+            this.Text = "Mapa";
             this.Load += new System.EventHandler(this.Mapa_Load);
             this.ResumeLayout(false);
 
