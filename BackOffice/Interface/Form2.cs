@@ -18,9 +18,11 @@ namespace BackOffice.Interface
     public partial class add_percurso : Form
     {
         public int atividades_uteis = 1;
+        private bool ponto_colocado = false;
         public percurso percurso;
         public GMapOverlay markersOverlay;
-        public PointLatLng point;
+        //public List<PointLatLng> pontos;
+        public PointLatLng ultimoPonto;
         public string objetivos;
         public string notas;
         public List<string> websites;
@@ -44,7 +46,8 @@ namespace BackOffice.Interface
             this.markersOverlay = new GMapOverlay("markers");
 
             this.percurso = new percurso();
-            this.point = new PointLatLng();
+            //this.pontos = new List<PointLatLng>();
+            this.ultimoPonto = new PointLatLng();
             this.objetivos = string.Empty;
             this.notas = string.Empty;
             this.websites = new List<string>();
@@ -69,7 +72,8 @@ namespace BackOffice.Interface
             markersOverlay = new GMapOverlay("markers");
 
             this.percurso = p;
-            this.point = new PointLatLng();
+            //this.pontos = new List<PointLatLng>();
+            this.ultimoPonto = new PointLatLng();
             this.objetivos = string.Empty;
             this.notas = string.Empty;
             this.websites = new List<string>();
@@ -78,50 +82,35 @@ namespace BackOffice.Interface
         private void mouse_click2(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             int x, y;
-            PointLatLng p;
-            /*if (atividades_uteis!=0) {
-            x = e.Location.X;
-            y = e.Location.Y;
-            p = new PointLatLng();
-            p = gMapControl2.FromLocalToLatLng(x, y);
-            this.point = p;
-            GMap.NET.WindowsForms.Markers.GMarkerGoogle penis = new GMap.NET.WindowsForms.Markers.GMarkerGoogle(p, GMap.NET.WindowsForms.Markers.GMarkerGoogleType.red);
-            markersOverlay.Markers.Add(penis);
-            gMapControl2.Overlays.Add(markersOverlay);
-            double currentZoom = gMapControl2.Zoom;
-            gMapControl2.Zoom = 9.1;
-            gMapControl2.Zoom = currentZoom;
-            }
-            this.atividades_uteis = 0;*/
-            if (this.point != null)
+            if (this.ponto_colocado)
             {
 
                 markersOverlay.Markers.Remove(marker);
                 x = e.Location.X;
                 y = e.Location.Y;
-                p = new PointLatLng();
-                p = gMapControl2.FromLocalToLatLng(x, y);
-                this.point = p;
-                marker = new GMap.NET.WindowsForms.Markers.GMarkerGoogle(p, GMap.NET.WindowsForms.Markers.GMarkerGoogleType.red);
-                markersOverlay.Markers.Add(marker);
+                this.ultimoPonto = new PointLatLng();
+                this.ultimoPonto = gMapControl2.FromLocalToLatLng(x, y);
+                marker = new GMap.NET.WindowsForms.Markers.GMarkerGoogle(this.ultimoPonto, GMap.NET.WindowsForms.Markers.GMarkerGoogleType.red);
+                this.markersOverlay.Markers.Add(marker);
                 gMapControl2.Overlays.Add(markersOverlay);
                 double currentZoom = gMapControl2.Zoom;
                 gMapControl2.Zoom = currentZoom+0.1;
                 gMapControl2.Zoom = currentZoom;
+                this.ponto_colocado = true;
             }
             else
             {
                 x = e.Location.X;
                 y = e.Location.Y;
-                p = new PointLatLng();
-                p = gMapControl2.FromLocalToLatLng(x, y);
-                this.point = p;
-                marker = new GMap.NET.WindowsForms.Markers.GMarkerGoogle(p, GMap.NET.WindowsForms.Markers.GMarkerGoogleType.red);
+                this.ultimoPonto = new PointLatLng();
+                this.ultimoPonto = gMapControl2.FromLocalToLatLng(x, y);
+                marker = new GMap.NET.WindowsForms.Markers.GMarkerGoogle(this.ultimoPonto, GMap.NET.WindowsForms.Markers.GMarkerGoogleType.red);
                 markersOverlay.Markers.Add(marker);
                 gMapControl2.Overlays.Add(markersOverlay);
                 double currentZoom = gMapControl2.Zoom;
                 gMapControl2.Zoom = currentZoom+0.1;
                 gMapControl2.Zoom = currentZoom;
+                this.ponto_colocado = true;
             }
         }
 
@@ -130,14 +119,14 @@ namespace BackOffice.Interface
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.objetivos = richTextBox1.Text;
-            this.notas = richTextBox2.Text;
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+        //    this.objetivos = richTextBox1.Text;
+        //    this.notas = richTextBox2.Text;
 
-            atividade a = new atividade(this.point, this.objetivos, this.notas, this.websites);
-            this.percurso.addAtividade(a);
-        }
+        //    atividade a = new atividade(this.point, this.objetivos, this.notas, this.websites);
+        //    this.percurso.addAtividade(a);
+        //}
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -219,9 +208,9 @@ namespace BackOffice.Interface
         {
             this.objetivos = richTextBox1.Text;
             this.notas = richTextBox2.Text;
-            if (!this.point.IsEmpty)
+            if (this.ponto_colocado)
             {
-                atividade a = new atividade(this.point, this.objetivos, this.notas, this.websites);
+                atividade a = new atividade(this.ultimoPonto, this.objetivos, this.notas, this.websites);
                 percurso.addAtividade(a);
                 richTextBox1.Clear();
                 richTextBox2.Clear();
@@ -229,13 +218,12 @@ namespace BackOffice.Interface
                 textBox1.Clear();
                 atividades_uteis = 1;
                 this.websites = new List<string>();
+                this.ponto_colocado = false;
             }
             else
             {
                 MessageBox.Show("Indique no mapa o local pretendido para a atividade.");
             }
-            this.point = new PointLatLng();
-
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
