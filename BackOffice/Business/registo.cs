@@ -28,7 +28,7 @@ namespace BackOffice.Business
 			this.fotos = new List<Bitmap>();
             this.traducao = String.Empty;
             this.tipo = ND;
-		}
+		}       
 		
 		public registo(List<Bitmap> fotos, byte[] voz, string traducao){
 			this.fotos = fotos;
@@ -94,15 +94,13 @@ namespace BackOffice.Business
                 for(; nodo_fotografia != null; nodo_fotografia = nodo_fotografia.NextSibling)
                 {
                     string foto_str = nodo_fotografia.InnerText;
-                    byte[] foto_bytes = Convert.FromBase64String(foto_str);
-                    Bitmap foto_bmp;
-                    /*using (var ms = new MemoryStream(foto_bytes))
+                    if (!String.IsNullOrEmpty(foto_str))
                     {
-                        //foto_bmp = new Bitmap(ms);
-                    }*/
-                    foto_bmp = (Bitmap)registo.byteArrayToImage(foto_bytes);
-                    fotos.Add(foto_bmp);
-                    
+                        byte[] foto_bytes = Convert.FromBase64String(foto_str);
+                        Bitmap foto_bmp;
+                        foto_bmp = (Bitmap)registo.byteArrayToImage(foto_bytes);
+                        fotos.Add(foto_bmp);
+                    }
                 }
             }
 
@@ -117,6 +115,7 @@ namespace BackOffice.Business
             }
             XmlNode nodo_rocha = nodo_registo.SelectSingleNode("rocha");
             XmlNode nodo_mineral = nodo_registo.SelectSingleNode("mineral");
+
             // TODO pegar na voz e traduzir
             registo reg = new registo(fotos,voz,String.Empty);
             if (nodo_rocha != null)
@@ -136,10 +135,6 @@ namespace BackOffice.Business
 
         public static byte[] imageToByteArray(System.Drawing.Image imageIn)
         {
-            /*MemoryStream ms = new MemoryStream();
-            imageIn.
-            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-            return ms.ToArray();*/
             byte[] byteArray = new byte[0];
             using (MemoryStream stream = new MemoryStream())
             {

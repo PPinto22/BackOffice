@@ -24,6 +24,7 @@ namespace BackOffice.Interface
         public string objetivos;
         public string notas;
         public List<string> websites;
+        GMap.NET.WindowsForms.Markers.GMarkerGoogle marker;
 
         public add_percurso()
         {
@@ -76,10 +77,12 @@ namespace BackOffice.Interface
 
         private void mouse_click2(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if (atividades_uteis!=0) {
-            int x = e.Location.X;
-            int y = e.Location.Y;
-            PointLatLng p = new PointLatLng();
+            int x, y;
+            PointLatLng p;
+            /*if (atividades_uteis!=0) {
+            x = e.Location.X;
+            y = e.Location.Y;
+            p = new PointLatLng();
             p = gMapControl2.FromLocalToLatLng(x, y);
             this.point = p;
             GMap.NET.WindowsForms.Markers.GMarkerGoogle penis = new GMap.NET.WindowsForms.Markers.GMarkerGoogle(p, GMap.NET.WindowsForms.Markers.GMarkerGoogleType.red);
@@ -89,7 +92,37 @@ namespace BackOffice.Interface
             gMapControl2.Zoom = 9.1;
             gMapControl2.Zoom = currentZoom;
             }
-            this.atividades_uteis = 0;
+            this.atividades_uteis = 0;*/
+            if (this.point != null)
+            {
+
+                markersOverlay.Markers.Remove(marker);
+                x = e.Location.X;
+                y = e.Location.Y;
+                p = new PointLatLng();
+                p = gMapControl2.FromLocalToLatLng(x, y);
+                this.point = p;
+                marker = new GMap.NET.WindowsForms.Markers.GMarkerGoogle(p, GMap.NET.WindowsForms.Markers.GMarkerGoogleType.red);
+                markersOverlay.Markers.Add(marker);
+                gMapControl2.Overlays.Add(markersOverlay);
+                double currentZoom = gMapControl2.Zoom;
+                gMapControl2.Zoom = 9.1;
+                gMapControl2.Zoom = currentZoom;
+            }
+            else
+            {
+                x = e.Location.X;
+                y = e.Location.Y;
+                p = new PointLatLng();
+                p = gMapControl2.FromLocalToLatLng(x, y);
+                this.point = p;
+                marker = new GMap.NET.WindowsForms.Markers.GMarkerGoogle(p, GMap.NET.WindowsForms.Markers.GMarkerGoogleType.red);
+                markersOverlay.Markers.Add(marker);
+                gMapControl2.Overlays.Add(markersOverlay);
+                double currentZoom = gMapControl2.Zoom;
+                gMapControl2.Zoom = 9.1;
+                gMapControl2.Zoom = currentZoom;
+            }
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)

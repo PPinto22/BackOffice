@@ -27,9 +27,8 @@ namespace BackOffice.Interface
 
         public Form1(utilizador u)
         {
-            conn = new BackOffice.DAO.percursosDAO();
-            this.coordenadas = conn.getCoordenadas();
             InitializeComponent();
+            
             this.Text = "Utilizador: " + u.nome;
             gMapControl1.DragButton = MouseButtons.Left;
             gMapControl1.CanDragMap = true;
@@ -41,16 +40,27 @@ namespace BackOffice.Interface
             gMapControl1.AutoScroll = true;
             //gMapControl1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.mouse_click);
 
-
-            this.markersOverlay = new GMapOverlay("markers");
-            foreach(PointLatLng p in coordenadas) {  
-                GMap.NET.WindowsForms.Markers.GMarkerGoogle penis = new GMap.NET.WindowsForms.Markers.GMarkerGoogle(p, GMap.NET.WindowsForms.Markers.GMarkerGoogleType.red);
-                markersOverlay.Markers.Add(penis);
-            }
-            gMapControl1.Overlays.Add(markersOverlay);
+            this.updateMarkers();
+            double currentZoom = gMapControl1.Zoom;
+            gMapControl1.Zoom = 9.1;
+            gMapControl1.Zoom = currentZoom;
 
             this.user = u;
             this.FormClosing+= Form1_Closing;
+        }
+
+        private void updateMarkers()
+        {
+            conn = new BackOffice.DAO.percursosDAO();
+            this.coordenadas = conn.getCoordenadas();
+
+            this.markersOverlay = new GMapOverlay("markers");
+            foreach (PointLatLng p in coordenadas)
+            {
+                GMap.NET.WindowsForms.Markers.GMarkerGoogle marker = new GMap.NET.WindowsForms.Markers.GMarkerGoogle(p, GMap.NET.WindowsForms.Markers.GMarkerGoogleType.red);
+                markersOverlay.Markers.Add(marker);
+            }
+            gMapControl1.Overlays.Add(markersOverlay);
         }
 
         public Form1()
@@ -104,9 +114,14 @@ namespace BackOffice.Interface
                     xml_lido.Load(file);
                     percurso p = percurso.readXML(xml_lido,this.user.email);
                     BackOffice.DAO.percursosDAO conn = new BackOffice.DAO.percursosDAO();
-                    if(conn.add(p))
-                    MessageBox.Show("Sessão carregada com sucesso!");
-                    else { MessageBox.Show("Percurso já existente!"); }
+                    if (conn.add(p))
+                    {
+                        this.refresh();
+                        MessageBox.Show("Sessão carregada com sucesso!");
+                    }
+                    else {
+                        MessageBox.Show("Percurso já existente!");
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -148,6 +163,9 @@ namespace BackOffice.Interface
                 markersOverlay.Markers.Add(penis);
             }
             gMapControl1.Overlays.Add(markersOverlay);
+            double currentZoom = gMapControl1.Zoom;
+            gMapControl1.Zoom = currentZoom+0.1;
+            gMapControl1.Zoom = currentZoom;
         }
     }
 }

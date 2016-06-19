@@ -181,7 +181,7 @@ namespace BackOffice.Interface
             listView1.Items.Clear();   
             for (int i = 0; i < percursos.Count; i++)
             {
-                ListViewItem l = new ListViewItem(percursos[i].data.ToShortDateString());
+                ListViewItem l = new ListViewItem(percursos[i].data.ToShortDateString()+" "+percursos[i].data.ToShortTimeString());
                 l.SubItems.Add(percursos[i].utilizador);
                 l.Tag = percursos[i];
                 this.listView1.Items.Add(l);

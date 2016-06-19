@@ -160,7 +160,7 @@
             // Data
             // 
             this.Data.Text = "Data";
-            this.Data.Width = 124;
+            this.Data.Width = 208;
             // 
             // Utilizador
             // 

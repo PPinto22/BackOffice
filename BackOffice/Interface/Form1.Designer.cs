@@ -47,6 +47,7 @@
             // 
             // button1
             // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button1.Location = new System.Drawing.Point(12, 283);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(118, 23);
@@ -57,6 +58,7 @@
             // 
             // button2
             // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button2.Location = new System.Drawing.Point(155, 283);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(130, 23);
@@ -67,6 +69,7 @@
             // 
             // button3
             // 
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button3.Location = new System.Drawing.Point(506, 282);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(110, 23);
@@ -77,6 +80,9 @@
             // 
             // gMapControl1
             // 
+            this.gMapControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gMapControl1.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.gMapControl1.Bearing = 0F;
             this.gMapControl1.CanDragMap = true;
@@ -112,6 +118,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(649, 318);
             this.Controls.Add(this.gMapControl1);
             this.Controls.Add(this.button3);

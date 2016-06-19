@@ -73,10 +73,51 @@ namespace BackOffice.Business
             }
 
             // Inserir em Gravacoes
-            // TODO ...
+            if(a.registo.voz != null)
+            {
+                cmd = new SqlCommand();
+                cmd.CommandText = @"insert into Gravacoes (voz,traducao,registo)
+                                    values (@p0,@p1,@p2)";
+                cmd.Parameters.AddWithValue("@p0", a.registo.voz);
+                cmd.Parameters.AddWithValue("@p1", a.registo.traducao);
+                cmd.Parameters.AddWithValue("@p2", registoID);
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = myConnection;
+                cmd.ExecuteNonQuery();
+            }
 
             // Inserir em Rochas/Minerais
-            // TODO ...
+            if(a.registo.tipo == registo.ROCHA)
+            {
+                rocha rocha = a.registo.rocha;
+                cmd = new SqlCommand();
+                cmd.CommandText = @"insert into Rochas (tipo,textura,designacao,cor,registo,peso)
+                                    values (@tipo,@textura,@designacao,@cor,@registo,@peso)";
+                cmd.Parameters.AddWithValue("@tipo", rocha.tipo);
+                cmd.Parameters.AddWithValue("@textura", rocha.textura);
+                cmd.Parameters.AddWithValue("@designacao", rocha.designacao);
+                cmd.Parameters.AddWithValue("@cor", rocha.cor);
+                cmd.Parameters.AddWithValue("@registo", registoID);
+                cmd.Parameters.AddWithValue("@peso", rocha.peso);
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = myConnection;
+                cmd.ExecuteNonQuery();
+            }
+            else if(a.registo.tipo == registo.MINERAL)
+            {
+                mineral mineral = a.registo.mineral;
+                cmd = new SqlCommand();
+                cmd.CommandText = @"insert into Minerais (risca,cor,designacao,peso,registo)
+                                    values (@risca,@cor,@designacao,@peso,@registo)";
+                cmd.Parameters.AddWithValue("@risca", mineral.risca);
+                cmd.Parameters.AddWithValue("@cor", mineral.cor);
+                cmd.Parameters.AddWithValue("@designacao", mineral.designacao);
+                cmd.Parameters.AddWithValue("@peso", mineral.peso);
+                cmd.Parameters.AddWithValue("@registo", registoID);
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = myConnection;
+                cmd.ExecuteNonQuery();
+            }
 
             myConnection.Close();
 
@@ -129,6 +170,7 @@ namespace BackOffice.Business
                 reader2.Read();
                 
                 int registoid = reader2.GetInt32(0);
+                myConnection2.Close();
 
                 SqlConnection myConnection3 = new SqlConnection(Properties.Resources.DB_CONNECTION_STRING);
 
@@ -145,31 +187,33 @@ namespace BackOffice.Business
                 Bitmap foto = null;
                 if (reader3.Read())
                 {
-                    byte[] bytesFoto = (byte[])reader3[1]; //não sei se esta a funcionar
+                    byte[] bytesFoto = (byte[])reader3[1];
                     foto = (Bitmap)registo.byteArrayToImage(bytesFoto);
                     fotos.Add(foto);
                 }
+                myConnection3.Close();
 
                 byte[] voz = null;
-                SqlConnection myConnection9 = new SqlConnection(Properties.Resources.DB_CONNECTION_STRING);
-                SqlCommand cmd9 = new SqlCommand();
-                cmd9.CommandText = "select * from Gravacoes where registo = @p1";
-                cmd9.Parameters.AddWithValue("@p1", registoid);
-                cmd9.CommandType = CommandType.Text;
-                cmd9.Connection = myConnection3;
+                SqlConnection myConnection6 = new SqlConnection(Properties.Resources.DB_CONNECTION_STRING);
+                SqlCommand cmd6 = new SqlCommand();
+                cmd6.CommandText = "select * from Gravacoes where registo = @p1";
+                cmd6.Parameters.AddWithValue("@p1", registoid);
+                cmd6.CommandType = CommandType.Text;
+                cmd6.Connection = myConnection6;
 
-                myConnection3.Open();
-                SqlDataReader reader9 = cmd9.ExecuteReader();
+                myConnection6.Open();
+                SqlDataReader reader6 = cmd6.ExecuteReader();
 
                 string traducao = string.Empty;
 
-                if (reader9.Read())
+                if (reader6.Read())
                 {
-                    voz = (byte[])reader9[1];
-                    traducao = reader9.GetString(2).Trim();
+                    voz = (byte[])reader6[1];
+                    traducao = reader6.GetString(2).Trim();
                     
                 }
                 registo reg = new registo(fotos, voz, traducao);
+                myConnection6.Close();
 
                 SqlConnection myConnection4 = new SqlConnection(Properties.Resources.DB_CONNECTION_STRING);
                 
@@ -194,7 +238,8 @@ namespace BackOffice.Business
                     rocha rocha = new rocha(designacaoRocha, tipoRocha, pesoRocha, texturaRocha, corRocha);
                     reg.setRocha(rocha);
                 }
-               
+
+                myConnection4.Close();
                 SqlConnection myConnection5 = new SqlConnection(Properties.Resources.DB_CONNECTION_STRING);
                 
                 SqlCommand cmd5 = new SqlCommand();
@@ -217,6 +262,8 @@ namespace BackOffice.Business
                     mineral mineral = new mineral(designacaoMineral, pesoMineral, riscaMineral, corMineral);
                     reg.setMineral(mineral);
                 }
+
+                myConnection5.Close();
                 a.registo = reg;
                 la.Add(a);
 

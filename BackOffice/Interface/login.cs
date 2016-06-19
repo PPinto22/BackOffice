@@ -56,7 +56,7 @@ namespace BackOffice
                         Interface.Form1 menu_inicial = (new BackOffice.Interface.Form1(user));
                         this.Hide();
                         menu_inicial.ShowDialog();
-                        
+                        this.Close();
                         
                     }
                     else
