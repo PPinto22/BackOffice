@@ -58,7 +58,7 @@ namespace BackOffice.Interface
                 this.voz = bytes;
                 System.IO.File.WriteAllBytes("voz.wav", bytes);
                 this.voz_path = Directory.GetCurrentDirectory() + "\\voz.wav";
-                simpleSound = new SoundPlayer("voz.wav");
+                simpleSound = new SoundPlayer(this.voz_path);
             }
             try
             {
