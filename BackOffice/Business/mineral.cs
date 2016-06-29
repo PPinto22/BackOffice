@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,7 +34,7 @@ namespace BackOffice.Business
             string d = designacao.InnerText;
             XmlNode peso = x.SelectSingleNode("peso");
             if (peso == null) throw new XmlException();
-            float p = float.Parse(peso.InnerText);
+            float p = float.Parse(peso.InnerText, CultureInfo.InvariantCulture);
             XmlNode risca = x.SelectSingleNode("risca");
             if (risca == null) throw new XmlException();
             string r = risca.InnerText;

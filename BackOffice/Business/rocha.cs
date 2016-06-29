@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +38,7 @@ namespace BackOffice.Business
             XmlNode tipo = x.SelectSingleNode("tipo");
             string t = tipo.InnerText;
             XmlNode peso = x.SelectSingleNode("peso");
-            float p = float.Parse(peso.InnerText);
+            float p = float.Parse(peso.InnerText, CultureInfo.InvariantCulture);
             XmlNode textura = x.SelectSingleNode("textura");
             string tex = textura.InnerText;
             XmlNode cor = x.SelectSingleNode("cor");
